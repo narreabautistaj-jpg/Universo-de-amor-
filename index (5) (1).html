@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Una misión para Yasu ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    overflow:hidden;
+    font-family:Arial,sans-serif;
+    color:white;
+    background:
+    radial-gradient(circle at 50% 45%,#4b126b 0%,#18052d 45%,#05000d 100%);
+}
+
+.stars{
+    position:fixed;
+    inset:0;
+    background-image:
+    radial-gradient(white 1px,transparent 1px),
+    radial-gradient(#ffb7e8 1px,transparent 1px);
+    background-size:55px 55px,90px 90px;
+    opacity:.6;
+}
+
+.container{
+    position:relative;
+    z-index:2;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
+
+.screen{
+    width:100%;
+    max-width:400px;
+    display:none;
+    animation:entrada .7s ease;
+}
+
+.screen.active{
+    display:block;
+}
+
+@keyframes entrada{
+    from{
+        opacity:0;
+        transform:translateY(20px) scale(.95);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+h1{
+    font-size:32px;
+    margin-bottom:15px;
+    text-shadow:0 0 18px #ff4fa3;
+}
+
+p{
+    font-size:18px;
+    line-height:1.5;
+}
+
+.heart{
+    font-size:110px;
+    cursor:pointer;
+    display:inline-block;
+    animation:pulso 1.3s infinite;
+    filter:drop-shadow(0 0 25px #ff3fa4);
+    user-select:none;
+}
+
+@keyframes pulso{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.15)}
+}
+
+.card{
+    padding:25px;
+    border-radius:25px;
+    background:rgba(255,255,255,.09);
+    border:1px solid rgba(255,255,255,.2);
+    backdrop-filter:blur(10px);
+    box-shadow:0 0 30px rgba(255,0,150,.2);
+}
+
+.question{
+    margin:20px 0;
+    font-size:21px;
+    font-weight:bold;
+}
+
+button{
+    width:100%;
+    margin:8px 0;
+    padding:14px;
+    border:0;
+    border-radius:30px;
+    color:white;
+    font-size:17px;
+    font-weight:bold;
+    background:linear-gradient(45deg,#ff3f9f,#9b51e0);
+    box-shadow:0 5px 20px rgba(255,50,160,.3);
+    cursor:pointer;
+}
+
+button:active{
+    transform:scale(.96);
+}
+
+.small{
+    font-size:14px;
+    opacity:.8;
+    margin-top:15px;
+}
+
+.box{
+    font-size:100px;
+    cursor:pointer;
+    animation:flotar 2s infinite ease-in-out;
+}
+
+@keyframes flotar{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-12px)}
+}
+
+.final{
+    font-size:20px;
+    line-height:1.7;
+}
+
+.signature{
+    margin-top:20px;
+    color:#ff9bd2;
+    font-weight:bold;
+}
+
+.floating{
+    position:fixed;
+    bottom:-50px;
+    pointer-events:none;
+    z-index:10;
+    animation:subir 4s linear forwards;
+}
+
+@keyframes subir{
+    0%{
+        transform:translateY(0) rotate(0);
+        opacity:0;
+    }
+    15%{opacity:1}
+    100%{
+        transform:translateY(-110vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+#respuesta{
+    margin-top:15px;
+    color:#ffd0ea;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+
+<div class="container">
+
+<!-- PANTALLA 1 -->
+<div id="inicio" class="screen active">
+
+    <div class="heart" onclick="irPregunta()">❤️</div>
+
+    <h1>¡Hey, Yasu! 💗</h1>
+
+    <div class="card">
+        <p>
+            Tengo una pequeña misión para ti... 👀
+        </p>
+
+        <p class="small">
+            Pero tendrás que tocar el corazón para comenzar.
+        </p>
+    </div>
+
+</div>
+
+
+<!-- PANTALLA 2 -->
+<div id="pregunta" class="screen">
+
+    <h1>Pregunta importante 😌</h1>
+
+    <div class="card">
+
+        <p class="question">
+            ¿Quién es la persona más especial de este universo? 🌌
+        </p>
+
+        <button onclick="respuesta(1)">
+            Yo 😎
+        </button>
+
+        <button onclick="respuesta(2)">
+            Yasu 💗
+        </button>
+
+        <button onclick="respuesta(3)">
+            El gato de internet 🐱
+        </button>
+
+        <div id="respuesta"></div>
+
+    </div>
+
+</div>
+
+
+<!-- PANTALLA 3 -->
+<div id="regalo" class="screen">
+
+    <h1>¡Misión casi completada! 🎉</h1>
+
+    <div class="card">
+
+        <p>
+            Encontraste la respuesta correcta. 😌❤️
+        </p>
+
+        <p style="margin-top:15px;">
+            Pero todavía hay una sorpresa...
+        </p>
+
+        <div class="box" onclick="abrirRegalo()">
+            🎁
+        </div>
+
+        <p class="small">
+            Toca la caja para abrirla.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- PANTALLA FINAL -->
+<div id="final" class="screen">
+
+    <div class="card">
+
+        <div style="font-size:70px;">
+            💖✨💗
+        </div>
+
+        <h1>¡Sorpresa, Yasu!</h1>
+
+        <p class="final">
+            Puede que esto sea solo una pequeña
+            página hecha con código...
+            <br><br>
+            pero la hice con la intención de
+            sacarte aunque sea una pequeña sonrisa. ❤️
+            <br><br>
+            Porque a veces no necesitamos
+            grandes cosas para hacer especial
+            un momento. ✨
+        </p>
+
+        <div class="signature">
+            Con cariño,<br>
+            Jiampier Criss ❤️
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* CAMBIAR PANTALLAS */
+
+function mostrar(id){
+
+    document.querySelectorAll(".screen")
+    .forEach(s => s.classList.remove("active"));
+
+    document.getElementById(id)
+    .classList.add("active");
+}
+
+
+/* CORAZÓN INICIAL */
+
+function irPregunta(){
+
+    explosion();
+
+    setTimeout(() => {
+        mostrar("pregunta");
+    },700);
+}
+
+
+/* RESPUESTAS */
+
+function respuesta(opcion){
+
+    let texto = document.getElementById("respuesta");
+
+    if(opcion === 1){
+
+        texto.innerHTML =
+        "JAJAJA, buena confianza 😎😂";
+
+    }
+
+    if(opcion === 2){
+
+        texto.innerHTML =
+        "¡CORRECTO! ❤️✨ Sabía que elegirías bien.";
+
+        setTimeout(() => {
+            mostrar("regalo");
+        },1400);
+
+    }
+
+    if(opcion === 3){
+
+        texto.innerHTML =
+        "🐱 El gato está indignado... pero te perdona 😂";
+    }
+
+}
+
+
+/* ABRIR REGALO */
+
+function abrirRegalo(){
+
+    explosionGrande();
+
+    setTimeout(() => {
+        mostrar("final");
+    },1000);
+
+}
+
+
+/* CORAZONES */
+
+function crearCorazon(){
+
+    const h = document.createElement("div");
+
+    h.className="floating";
+
+    const lista=[
+        "❤️","💗","💖","💕","💘","💓","✨"
+    ];
+
+    h.innerHTML=
+        lista[Math.floor(Math.random()*lista.length)];
+
+    h.style.left=
+        Math.random()*100+"vw";
+
+    h.style.fontSize=
+        (18+Math.random()*35)+"px";
+
+    h.style.animationDuration=
+        (3+Math.random()*4)+"s";
+
+    document.body.appendChild(h);
+
+    setTimeout(()=>{
+        h.remove();
+    },7000);
+}
+
+setInterval(crearCorazon,600);
+
+
+/* EXPLOSIONES */
+
+function explosion(){
+
+    for(let i=0;i<20;i++){
+
+        setTimeout(crearCorazon,i*50);
+
+    }
+}
+
+function explosionGrande(){
+
+    for(let i=0;i<60;i++){
+
+        setTimeout(crearCorazon,i*35);
+
+    }
+}
+
+</script>
+
+</body>
+</html>
